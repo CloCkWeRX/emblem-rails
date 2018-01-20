@@ -8,12 +8,12 @@ module Emblem
     class Template < Ember::Handlebars::Template
 
       def evaluate(scope, locals, &block)
-        target = global_template_target(scope)
+        target = global_template_target(scope.logical_path, config)
         raw = raw?(scope)
 
         template = data
 
-        if configuration.precompile
+        if config.precompile
           if raw
             template = precompile_emblem(template)
           else
